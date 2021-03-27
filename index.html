@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="form_validationstyle.css" />
+  <script src="jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- add icon link -->
+  <title>Validation Form</title>
+  <link rel = "icon" href =  
+  "ph.png" 
+          type = "image/x-icon"> 
+
+</head>
+
+<body>
+
+  
+
+
+
+  
+
+  <div class="login">
+    <form style="max-width: 357px; margin: auto;margin-top: 8%;">
+      <h2 class="title">Validation Form</h2>
+      <div class="input-container">
+        <i class="fa fa-user icon"></i>
+        <input class="input-field" type="text" placeholder="Firstname" name="Firstname" id="fn" />
+      </div>
+
+
+
+
+      <div class="input-container">
+        <i class="fa fa-user icon"></i>
+        <input class="input-field" type="text" placeholder="lastname " name="lasttname" id="ln" />
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-envelope icon"></i>
+        <input class="input-field" type="email" placeholder="Email" name="email" id="email" />
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-key icon"></i>
+        <input class="input-field" type="password" placeholder="Password" name="password" id="password" />
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-key icon"></i>
+        <input class="input-field" type="password" placeholder="Comfirm Password" name="confirmpassword"
+          id="confirmpassword" />
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-birthday-cake icon"></i>
+        <input class="input-field date" type="date" placeholder="mm/dd/yy" name="birthday" id="birthday" />
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-phone icon"></i>
+        <input class="input-field" type="tel" placeholder="phone(PH)" name="phone" id="phone" />
+      </div>
+      <button type="submit" class="btn">Register</button>
+      <img src="ph.png" class="ph">
+      <img src="https://metricfunk27.files.wordpress.com/2015/05/0fgerke.gif" class="lanaya" alt="animationhere">
+
+      <img src="https://media1.giphy.com/media/keUkbYaapaa5gfUtRf/giphy.gif" class="line">
+  </div>
+
+
+
+ 
+  </form>
+  
+
+</body>
+
+<script>
+  $(document).ready(function () {
+    $(".btn").click(function () {
+      var firstnameandlastnameerror = ""
+      var firstnameandlastnameerrorboolean = false;
+
+      var emailerror = ""
+      var emailerrorboolean = false;
+
+
+      var passwordmatcherror = ""
+      var passwordmatcherrorboolean = false;
+
+      var passworderror = ""
+      var passworderrorboolean = false;
+
+      var birthdayerror = ""
+      var birthdayerrorboolean = false;
+
+      var phonenumbererror = ""
+      var phonenumbererrorboolean = false;
+
+
+
+
+
+
+      //--------------Firstname and Lastname VALIDATION-----------------
+      var fn = $("#fn").val();
+      var ln = $("#ln").val();
+
+      var symbols = "~!@#$%^&*()_+<>?:'";
+      var res = symbols.charAt(0);
+      // var symbolslen = symbols.length;
+      var count = 0;
+      var positive = 0;
+
+      //FOR FIRST NAME
+      for (indexsymbols in symbols) {
+        var insidesymbols = symbols[indexsymbols]
+        for (indexfn in fn) {
+          var insidefn = fn[indexfn]
+
+          if (insidefn == insidesymbols) {
+            positive += 1
+          }
+        }
+
+        //FOR LASTNAME
+        for (indexln in ln) {
+          var insideln = ln[indexln]
+
+          if (insideln == insidesymbols) {
+            positive += 1
+          }
+        }
+
+      }
+      if (positive > 0 || fn == "" || ln == "") {
+
+        firstnameandlastnameerrorboolean = true;
+        firstnameandlastnameerror = ("*Please enter a valid name")
+      
+      }
+      // // --------------------EMAIL VALIDATION-----------------------------
+
+      var email = $("#email").val();
+      var doubledot = ".";
+      var emailerror = 0;
+
+      if (email[0] == "@" || email[0] == ".") {
+        emailerror += 1;
+      }
+
+      for (insideemail in email) {
+        var indexemail = email[insideemail];
+
+        for (insidedoubledot in doubledot) {
+          var indexddoubledot = doubledot[insidedoubledot];
+
+        }
+        if (indexemail == indexddoubledot) {
+          emailerror += 1
+        }
+      }
+
+      if (emailerror > 1 || email == "") {
+        emailerrorboolean = true;
+        emailerror = ("*Please enter a valid email")
+      }
+
+      // ------------------------------------------------------ PASSWORD VALIDATION----------
+
+      var password = $("#password").val();
+      var confirmpassword = $("#confirmpassword").val();
+      var checkspecialChar = 0
+      var checknumber = 0
+      var checklowercase = 0
+      var checkuppercase = 0
+
+      if (password != confirmpassword || password == "") {
+
+        passwordmatcherrorboolean = true;
+        passwordmatcherror = ("*Your passwords do not match. Please try again");
+      }
+
+      var specialcharacter = "~!@#$%^&*()__+";
+      var number = "0123456789"
+      var lowercase = "abcdefghijklmnopqrstuvwxyz"
+      var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+      for (insidepassword in password) {
+        var indexpassword = password[insidepassword];
+
+        for (insidespecialchar in specialcharacter) {
+          var indexspecialchar = specialcharacter[insidespecialchar];
+
+          if (indexpassword == indexspecialchar) {
+            checkspecialChar += 1
+          }
+
+        }
+
+        // ---------- number -------------
+
+        for (insidenumber in number) {
+          var indexnumber = number[insidenumber];
+
+          if (indexpassword == indexnumber) {
+
+            checknumber += 1
+          }
+
+        }
+        // //----------lowercase-----------
+        for (insidelowercase in lowercase) {
+          var indexlowercase = lowercase[insidelowercase];
+
+          if (indexpassword == indexlowercase) {
+
+            checklowercase += 1
+          }
+
+        }
+
+        //  //----------uppercase-----------
+        for (insideuppercase in uppercase) {
+          var indexuppercase = uppercase[insideuppercase];
+
+          if (indexpassword == indexuppercase) {
+
+            checkuppercase += 1
+          }
+
+        }
+
+
+
+
+
+
+
+      }
+
+      if ((checkspecialChar > 0) && (checknumber > 0) && (checklowercase > 0) && (checkuppercase > 0) && (password.length >= 8)) {
+
+      } else {
+        passworderrorboolean = true;
+        passworderror = ("*Your password must have 8 characters or more, and contain at least one special character, number, uppercase letter, and lowercase letter.")
+      }
+
+
+      //   //---------------- PHONE VALIDATION------------------------------------
+
+      var phone = $("#phone").val();
+
+
+
+
+      var phonenumber = "abcdefghijklmnopqrstuvwxyz"
+
+      var phoneindexfirst = phone[0];
+      var phoneindexsecond = phone[1];
+      var phoneindexthird = phone[2];
+      var phoneindexforth = phone[3];
+
+      var checkphonenumber = 0;
+
+
+      for (insidephone in phone) {
+        var insidephone = phone[insidephone]
+
+
+
+        for (insidephonenumber in phonenumber) {
+          var indexphonenumber = phonenumber[insidephonenumber];
+
+          if (insidephone == indexphonenumber) {
+
+            checkphonenumber += 1
+          }
+
+        }
+
+      }
+
+
+
+
+
+      if ((phoneindexfirst == '+') && (phoneindexsecond == '6') && (phoneindexthird == '3') && (phoneindexforth == "9") && (phone.length == 13) && (checkphonenumber == 0)) {
+
+      } else {
+
+
+        phonenumbererrorboolean = true;
+        phonenumbererror = ("*Please enter a valid phone number \n*Your phone number is not on PH origin. Accounts are exclusive for Philippine users only")
+      }
+
+
+      //-------------------BIRTHDAY VALIDATION-----------------------------
+
+
+
+      var birthday = $("#birthday").val();
+      
+
+      
+
+      var yearinputed = birthday.split("-");
+      
+      
+
+      var calculateyear = (yearinputed[0]);
+      
+
+      var getyear = new Date().getFullYear()
+
+      var calculate = (getyear - calculateyear)
+
+      if ((calculate < 18) || (birthday == "")) {
+
+        birthdayerrorboolean = true;
+        birthdayerror = ("*You must be 18 years old and above to create an account.");
+     
+
+
+
+      }
+
+
+
+      //CHECKING ALL AND DISPLAYING THE ERRORS
+
+
+
+      if (passwordmatcherrorboolean == true || firstnameandlastnameerrorboolean == true || emailerrorboolean == true || passworderrorboolean == true || birthdayerrorboolean == true || phonenumbererrorboolean == true) {
+        alert(passwordmatcherror + "\n" + firstnameandlastnameerror + "\n" + emailerror + "\n" + passworderror + "\n" + birthdayerror + "\n" + phonenumbererror)
+
+      }
+      else if (passwordmatcherrorboolean == false && firstnameandlastnameerrorboolean == false && emailerrorboolean == false && passworderrorboolean == false && birthdayerrorboolean == false && phonenumbererrorboolean == false) {
+        alert("Account Created")
+
+      }
+
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+  });
+</script>
+
+</html>
